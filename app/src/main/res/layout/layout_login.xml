@@ -55,7 +55,7 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/newsMoreTextSize"
             android:layout_gravity="end"
-            android:onClick="viewForgotPAssword"
+            android:onClick="viewForgotPassword"
             android:layout_marginTop="10dp"/>
 
         <Button

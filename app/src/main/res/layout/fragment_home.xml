@@ -5,17 +5,190 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Home" />
+
+    <androidx.cardview.widget.CardView
+
+        style="@style/loginCard"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+        android:elevation="5dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:background="@color/whiteCardColor">
+
+
+
+
+
+        <LinearLayout
+            style="@style/linearParent"
+            android:layout_gravity="center"
+            android:padding="@dimen/loginViewsMargin">
+
+
+            <TextView
+                style="@style/headerTextPrimary"
+                android:text="Your Details"
+                android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputEmail"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextNameCaption"
+                        style="@style/userDetailsEditTextCaption"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="1"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="75dp"
+                        android:text="Name     :"
+
+                        android:hint="@string/login_email_hint"/>
+
+                    <EditText
+                        android:id="@+id/editTextName"
+                        style="@style/userDetailsEditText"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="1"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextNameCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:hint="Name"/>
+
+
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputPhone"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextPhoneCaption"
+                        style="@style/userDetailsEditTextCaption"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="1"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="75dp"
+                        android:text="Phone    :"
+
+                        android:hint="@string/login_email_hint"/>
+
+                    <EditText
+                        android:id="@+id/editTextPhone"
+                        style="@style/userDetailsEditText"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="1"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextPhoneCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:hint="Mobile Number"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputAddress"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextAddressCaption"
+                        style="@style/userDetailsEditTextCaption"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="1"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="75dp"
+                        android:text="Address :"
+
+                        android:hint="@string/login_email_hint"/>
+
+                    <EditText
+                        android:id="@+id/editTextAddress"
+                        style="@style/userDetailsEditText"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="3"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextAddressCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:hint="Address"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputVoteStatus"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextVoteStatusCaption"
+                        style="@style/userDetailsEditTextCaption"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:maxLines="2"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="75dp"
+                        android:text="Vote Status    :"
+
+                        android:hint="@string/login_email_hint"/>
+
+                    <Button
+                        android:id="@+id/editTextVoteStatus"
+                        style="@style/voteStatusButton"
+                        android:inputType="none"
+                        android:maxLines="4"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextVoteStatusCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Not Voted"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

@@ -12,16 +12,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    TextView userName, userPhone, userPassword, userPasswordConfirmation, userEmail;
+    TextView userName, userPhone, userPassword, userPasswordConfirmation, userEmail,userAadhar, userAddress;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,15 @@ public class RegisterActivity extends AppCompatActivity {
         userPassword = (TextView) findViewById(R.id.userPassword);
         userPasswordConfirmation = (TextView) findViewById(R.id.userPasswordConfirmation);
         userEmail = (TextView) findViewById(R.id.userEmail);
+        userAadhar = (TextView) findViewById(R.id.userAadharNo);
+        userAddress = (TextView) findViewById(R.id.userAddress);
+
+
+        // Write a message to the database
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
+
+       // myRef.setValue("Hello, World!");
 
     }
 
@@ -46,11 +60,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerNewUser() {
 
-        String name = userName.getText().toString().trim();
-        String phone = userPhone.getText().toString().trim();
-        String email = userEmail.getText().toString().trim();
+        final String name = userName.getText().toString().trim();
+        final String phone = userPhone.getText().toString().trim();
+        final String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
         String passwordConfirm = userPasswordConfirmation.getText().toString().trim();
+        final String aadharNo = userAadhar.getText().toString().trim();
+        final String address = userAddress.getText().toString().trim();
+
 
         if(name.isEmpty()) {
             warn("name");
@@ -62,6 +79,10 @@ public class RegisterActivity extends AppCompatActivity {
             warn("password");
         }else if(passwordConfirm.isEmpty()) {
             warn("passwordConfirm");
+        }else if(aadharNo.isEmpty()) {
+            warn("Aadhar Number");
+        }else if(address.isEmpty()) {
+            warn("Address");
         }else if(!(password.equals(passwordConfirm))){
             userPassword.setText("");
             userPasswordConfirmation.setText("");
@@ -80,6 +101,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "createUserWithEmail:success",
                                         Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
+
+
+
+                                setUserDetails(user,name,phone,email,aadharNo,address);
+
+
                                 //updateUI(user);
                                 finish();
                                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
@@ -94,6 +121,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                             // ...
                         }
+
+
                     })
             .addOnFailureListener(this, new OnFailureListener() {
                 @Override
@@ -111,6 +140,30 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void setUserDetails(FirebaseUser user, String name, String phone, String email, String aadharNo, String address) {
+
+        Person person = new Person( name,  phone,  email,  aadharNo,  address,false);
+        myRef.child(user.getUid()).setValue(person).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Toast.makeText(getApplicationContext(),"Data Uploaded Successfully",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+
+
 
     private void warn(String value) {
 

@@ -43,6 +43,29 @@
                 android:hint="Mobile Number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/userAadharNo"
+                style="@style/modifiedEditText"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:hint="Aadhar Number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/userAddress"
+                style="@style/modifiedEditText"
+                android:inputType="textPostalAddress"
+                android:maxLines="3"
+                android:hint="Address"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">

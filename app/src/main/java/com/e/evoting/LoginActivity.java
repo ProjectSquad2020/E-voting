@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     TextView  userPassword, userEmail;
+    static FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void viewRegisterClicked(View view) {
-        finish();
+       // finish();
         startActivity(new Intent(this,RegisterActivity.class));
     }
 
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+         currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
             //registerNewUser();
 
@@ -72,9 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         String password = userPassword.getText().toString().trim();
 
         if(email.isEmpty()) {
-            warn("name");
+            warn("Email");
         }else if(password.isEmpty()) {
-            warn("phone");
+            warn("Password");
         }else{
 
             mAuth.signInWithEmailAndPassword(email, password)
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
 
-                                finish();
+                               // finish();
                                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
 
@@ -131,11 +132,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAuth.signOut();
+       // mAuth.signOut();
 
     }
 
-    public void viewForgotPAssword(View view) {
+    public void viewForgotPassword(View view) {
 
         Toast.makeText(getApplicationContext(),"Will be implemented shortly",Toast.LENGTH_SHORT).show();
 
