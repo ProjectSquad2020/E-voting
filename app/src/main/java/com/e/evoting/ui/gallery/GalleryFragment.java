@@ -124,21 +124,7 @@ public class GalleryFragment extends Fragment {
         fetchFromDatabase();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        String[] items = new String[] { "Select one","Party 1", "Party 2", "Party 3","Party 4", "Party 5" };
+        String[] items = new String[]{"Select one", "Party 1", "Party 2", "Party 3", "Party 4", "Party 5"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_item, items);
@@ -150,23 +136,18 @@ public class GalleryFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 selectedPartyName = parent.getItemAtPosition(position).toString();
-                Log.v("item", selectedPartyName );
-                Toast.makeText(getContext(),selectedPartyName,Toast.LENGTH_SHORT).show();
+                Log.v("item", selectedPartyName);
+                Toast.makeText(getContext(), selectedPartyName, Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getContext(),"Nothing selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Nothing selected", Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
-
-
-
 
 
         buttonVote.setOnClickListener(new View.OnClickListener() {
@@ -175,21 +156,21 @@ public class GalleryFragment extends Fragment {
                 // Vote button clicked
                 aadharNumberEntered = editTextAadharNo.getText().toString().trim();
 
-                if(aadharNumberEntered.isEmpty()){
-                    Toast.makeText(getContext(),"Please enter your Aadhar No",Toast.LENGTH_SHORT).show();
-                }else if(selectedPartyName.equalsIgnoreCase("Select one")){
-                    Toast.makeText(getContext(),"Please select one party to vote",Toast.LENGTH_SHORT).show();
-                }else if(!(aadharNumberEntered.equalsIgnoreCase(aadharNo))) {
+                if (aadharNumberEntered.isEmpty()) {
+                    Toast.makeText(getContext(), "Please enter your Aadhar No", Toast.LENGTH_SHORT).show();
+                } else if (selectedPartyName.equalsIgnoreCase("Select one")) {
+                    Toast.makeText(getContext(), "Please select one party to vote", Toast.LENGTH_SHORT).show();
+                } else if (!(aadharNumberEntered.equalsIgnoreCase(aadharNo))) {
                     Toast.makeText(getContext(), "Aadhar Number entered is incorrect!!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
 
                     textViewfingerprintCaption.setText("Fingerprint Authentication is required!!");
                     getFingerprintScanStatus();
 
-                    if(success){
+                    if (success) {
 
-                    }else{
-                       // Toast.makeText(getContext(),"Not success",Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Toast.makeText(getContext(),"Not success",Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -200,35 +181,20 @@ public class GalleryFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-               // textView.setText(s);
+                // textView.setText(s);
             }
         });
         return root;
     }
 
-    public static void printSuccessMessage(Context context){
-        Toast.makeText(context,"Success in the method",Toast.LENGTH_SHORT).show();
+    public static void printSuccessMessage(Context context) {
+        Toast.makeText(context, "Success in the method", Toast.LENGTH_SHORT).show();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("votes");
-
 
 
     }
@@ -242,24 +208,24 @@ public class GalleryFragment extends Fragment {
         // Check 4: Lock screen is secured with atleast 1 type of lock
         // Check 5: Atleast 1 Fingerprint is registered
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             fingerprintManager = (FingerprintManager) getActivity().getSystemService(FINGERPRINT_SERVICE);
             keyguardManager = (KeyguardManager) getActivity().getSystemService(KEYGUARD_SERVICE);
 
-            if(!fingerprintManager.isHardwareDetected()){
+            if (!fingerprintManager.isHardwareDetected()) {
 
                 textViewfingerprintScanStatus.setText("Fingerprint Scanner not detected in Device");
 
-            } else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
+            } else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
 
                 textViewfingerprintScanStatus.setText("Permission not granted to use Fingerprint Scanner");
 
-            } else if (!keyguardManager.isKeyguardSecure()){
+            } else if (!keyguardManager.isKeyguardSecure()) {
 
                 textViewfingerprintScanStatus.setText("Add Lock to your Phone in Settings");
 
-            } else if (!fingerprintManager.hasEnrolledFingerprints()){
+            } else if (!fingerprintManager.hasEnrolledFingerprints()) {
 
                 textViewfingerprintScanStatus.setText("You should add atleast 1 Fingerprint to use this Feature");
 
@@ -269,10 +235,10 @@ public class GalleryFragment extends Fragment {
 
                 generateKey();
 
-                if (cipherInit()){
+                if (cipherInit()) {
 
                     FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
-                    FingerprintHandler fingerprintHandler = new FingerprintHandler(getContext(),root,MainActivity.user,selectedPartyName);
+                    FingerprintHandler fingerprintHandler = new FingerprintHandler(getContext(), root, MainActivity.user, selectedPartyName);
                     fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
 
                 }
@@ -353,26 +319,25 @@ public class GalleryFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Person p  = (Person)dataSnapshot.getValue(Person.class);
+                Person p = (Person) dataSnapshot.getValue(Person.class);
 
                 editTextName.setText(p.getName());
 
                 aadharNo = p.getAadhar();
                 voted = p.getVoted();
                 //Toast.makeText(getActivity(),"voted="+voted,Toast.LENGTH_LONG).show();
-                if(voted){
-                Toast.makeText(getActivity(),"You have already voted!!",Toast.LENGTH_SHORT).show();
-                Log.w(TAG, "Voted in if: " + voted);
-                editTextAadharNo.setText(aadharNo);
-                editTextAadharNo.setEnabled(false);
-                 buttonVote.setEnabled(false);
-                 buttonVote.setText("Already Voted!!!");
-                 dynamicSpinner.setEnabled(false);
+                if (voted) {
+                    //Toast.makeText(getActivity(),"You have already voted!!",Toast.LENGTH_SHORT).show();
+                    Log.w(TAG, "Voted in if: " + voted);
+                    editTextAadharNo.setText(aadharNo);
+                    editTextAadharNo.setEnabled(false);
+                    buttonVote.setEnabled(false);
+                    buttonVote.setText("Already Voted!!!");
+                    dynamicSpinner.setEnabled(false);
                 }
 
 
                 editTextAddress.setText(p.getAddress());
-
 
 
                 Log.w(TAG, "Voted: " + voted);
@@ -382,7 +347,7 @@ public class GalleryFragment extends Fragment {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 //Log.w(TAG, "Failed to read value.", error.toException());
-                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

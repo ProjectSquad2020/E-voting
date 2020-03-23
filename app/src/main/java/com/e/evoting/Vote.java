@@ -6,13 +6,12 @@ public class Vote {
     String partyName;
 
 
-
     public Vote(String userId, String partyName) {
         this.userId = userId;
         this.partyName = partyName;
     }
 
-    Vote(){
+    Vote() {
 
     }
 
