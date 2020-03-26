@@ -88,9 +88,16 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
 
-                               // finish();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                if(user.getEmail().equalsIgnoreCase("projectmates174@gmail.com") || user.getEmail().equalsIgnoreCase("kavyamanjunath1597@gmail.com") ){
 
+                                    // finish();
+                                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+
+                                }else {
+
+                                    // finish();
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                }
 
 
 
@@ -137,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void viewForgotPassword(View view) {
+
 
         Toast.makeText(getApplicationContext(),"Will be implemented shortly",Toast.LENGTH_SHORT).show();
 

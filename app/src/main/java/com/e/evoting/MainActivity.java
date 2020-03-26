@@ -50,14 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -103,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 Person p  = (Person)dataSnapshot.getValue(Person.class);
 
-                nav_user_name.setText(p.getName());
-                nav_user_phone.setText(p.getPhone());
-                nav_user_email.setText(p.getEmail());
+                nav_user_name.setText("Name      : "+p.getName());
+                nav_user_phone.setText("Phone No. : "+p.getPhone());
+                nav_user_email.setText("Email     : "+p.getEmail());
 
                 //Log.d(TAG, "Value is: " + value);
             }

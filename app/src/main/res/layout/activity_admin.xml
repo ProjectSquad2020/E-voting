@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".ui.slideshow.SlideshowFragment">
+    tools:context=".AdminActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTop"
@@ -25,18 +24,19 @@
 
 
             <Button
-                android:id="@+id/buttonShowVotesFrag"
+                android:id="@+id/buttonCountVotes"
                 style="@style/CardView.Light"
                 android:background="@color/cardview_shadow_end_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="CountTheVotes"
                 android:textColor="@color/colorPrimary"
                 android:text="Count the votes" />
 
             <EditText
-                android:id="@+id/editTextTotalVotesFrag"
+                android:id="@+id/editTextTotalVotes"
                 android:layout_width="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"
@@ -59,7 +59,7 @@
     <RelativeLayout
         android:background="#8F8F86"
         android:layout_below="@id/cardViewTop"
-        android:id="@+id/relativeLayoutFrag"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -72,7 +72,7 @@
             android:layout_centerVertical="true" />
 
         <EditText
-            android:id="@+id/editTextPartyNameFrag"
+            android:id="@+id/editTextPartyName"
             style="@style/userDetailsEditTextCaption"
             android:layout_width="75dp"
             android:layout_alignParentStart="true"
@@ -87,7 +87,7 @@
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/editTextCountFrag"
+            android:id="@+id/editTextCount"
             style="@style/userDetailsEditText"
             android:layout_width="wrap_content"
             android:layout_alignParentEnd="true"
@@ -100,17 +100,17 @@
             android:paddingEnd="8dp"
             android:textAlignment="center" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/relativeLayoutFrag"
+        android:layout_below="@+id/relativeLayout"
         android:layout_above="@+id/cardViewBottom"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:id="@+id/recyclerViewFrag">
+        android:id="@+id/recyclerView">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -133,7 +133,7 @@
 
 
             <EditText
-                android:id="@+id/editTextWinnerFrag"
+                android:id="@+id/editTextWinner"
                 android:layout_width="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"
@@ -152,6 +152,10 @@
 
 
     </androidx.cardview.widget.CardView>
+
+
+
+
 
 
 </RelativeLayout>
