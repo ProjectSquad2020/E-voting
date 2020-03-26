@@ -175,7 +175,7 @@ public class SlideshowFragment extends Fragment {
         for (Result rr : countedResults) {
             total += rr.getNumberOfVotes();
         }
-        editTextTotalVotes.setText("Total no. of Votes :" + total);
+        editTextTotalVotes.setText("Total no. of Votes : " + total);
         results = countedResults;
 
 

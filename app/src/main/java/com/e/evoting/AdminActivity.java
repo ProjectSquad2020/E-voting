@@ -178,7 +178,7 @@ public class AdminActivity extends AppCompatActivity {
         ArrayList<Result> results;
 
         if (!counted) {
-            editTextTotalVotes.setText("Total no. of Votes :" + partyNames.size());
+            editTextTotalVotes.setText("Total no. of Votes : " + partyNames.size());
             results = countFreq(getStringArray(partyNames));
 
 
@@ -187,7 +187,7 @@ public class AdminActivity extends AppCompatActivity {
             for (Result rr : countedResults) {
                 total += rr.numberOfVotes;
             }
-            editTextTotalVotes.setText("Total no. of Votes :" + total);
+            editTextTotalVotes.setText("Total no. of Votes : " + total);
             results = countedResults;
 
         }
