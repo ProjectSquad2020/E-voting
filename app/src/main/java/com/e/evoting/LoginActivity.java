@@ -18,14 +18,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-
 public class LoginActivity extends AppCompatActivity {
 
 
-
-
     private FirebaseAuth mAuth;
-    TextView  userPassword, userEmail;
+    TextView userPassword, userEmail;
     static FirebaseUser currentUser;
 
     @Override
@@ -38,32 +35,30 @@ public class LoginActivity extends AppCompatActivity {
         userPassword = (TextView) findViewById(R.id.editTextPassword);
 
 
-
     }
 
     public void viewRegisterClicked(View view) {
-       // finish();
-        startActivity(new Intent(this,RegisterActivity.class));
+        // finish();
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-         currentUser = mAuth.getCurrentUser();
-        if(currentUser==null){
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
             //registerNewUser();
 
-        }else {
+        } else {
             updateUI(currentUser);
         }
     }
 
 
-
     private void updateUI(FirebaseUser currentUser) {
 
-        Toast.makeText(this,"Welcome"+currentUser.getEmail(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Welcome" + currentUser.getEmail(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -72,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
 
-        if(email.isEmpty()) {
+        if (email.isEmpty()) {
             warn("Email");
-        }else if(password.isEmpty()) {
+        } else if (password.isEmpty()) {
             warn("Password");
-        }else{
+        } else {
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -88,18 +83,16 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
 
-                                if(user.getEmail().equalsIgnoreCase("projectmates174@gmail.com") || user.getEmail().equalsIgnoreCase("kavyamanjunath1597@gmail.com") ){
+                                if (user.getEmail().equalsIgnoreCase("projectmates174@gmail.com") || user.getEmail().equalsIgnoreCase("kavyamanjunath1597@gmail.com")) {
 
                                     // finish();
                                     startActivity(new Intent(getApplicationContext(), AdminActivity.class));
 
-                                }else {
+                                } else {
 
                                     // finish();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 }
-
-
 
 
                             } else {
@@ -116,11 +109,10 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnFailureListener(this, new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Login failed."+e.getLocalizedMessage(),
+                            Toast.makeText(LoginActivity.this, "Login failed." + e.getLocalizedMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
-
 
 
         }
@@ -131,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void warn(String value) {
 
-        Toast.makeText(getApplicationContext(),value + " cannot be empty",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), value + " cannot be empty", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -139,14 +131,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // mAuth.signOut();
+        // mAuth.signOut();
 
     }
 
     public void viewForgotPassword(View view) {
 
-
-        Toast.makeText(getApplicationContext(),"Will be implemented shortly",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Will be implemented shortly", Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(new Intent(getApplicationContext(), PasswordResetActivity.class));
 
     }
 }
