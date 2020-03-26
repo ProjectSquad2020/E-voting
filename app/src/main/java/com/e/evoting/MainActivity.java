@@ -51,18 +51,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        View headerView =  navigationView.getHeaderView(0);
-         nav_user_name = (TextView) headerView.findViewById(R.id.userNameTextView);
-         nav_user_phone = (TextView) headerView.findViewById(R.id.userPhoneTextView);
-         nav_user_email = (TextView) headerView.findViewById(R.id.userEmailTextView);
-
-
-
+        View headerView = navigationView.getHeaderView(0);
+        nav_user_name = (TextView) headerView.findViewById(R.id.userNameTextView);
+        nav_user_phone = (TextView) headerView.findViewById(R.id.userPhoneTextView);
+        nav_user_email = (TextView) headerView.findViewById(R.id.userEmailTextView);
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -75,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-
-
-
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -87,18 +80,17 @@ public class MainActivity extends AppCompatActivity {
         myRef = database.getReference("users").child(user.getUid());
 
 
-
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Person p  = (Person)dataSnapshot.getValue(Person.class);
+                Person p = (Person) dataSnapshot.getValue(Person.class);
 
-                nav_user_name.setText("Name      : "+p.getName());
-                nav_user_phone.setText("Phone No. : "+p.getPhone());
-                nav_user_email.setText("Email     : "+p.getEmail());
+                nav_user_name.setText("Name      : " + p.getName());
+                nav_user_phone.setText("Phone No. : " + p.getPhone());
+                nav_user_email.setText("Email     : " + p.getEmail());
 
                 //Log.d(TAG, "Value is: " + value);
             }
@@ -107,12 +99,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 //Log.w(TAG, "Failed to read value.", error.toException());
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
 
 
     }

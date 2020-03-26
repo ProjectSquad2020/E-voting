@@ -8,15 +8,12 @@
 
     <androidx.cardview.widget.CardView
         style="@style/loginCard"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-        android:elevation="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:background="@color/whiteCardColor">
-
-
-
+        android:background="@color/whiteCardColor"
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius">
 
 
         <LinearLayout
@@ -27,8 +24,8 @@
 
             <TextView
                 style="@style/headerTextPrimary"
-                android:text="Time to Vote"
-                android:layout_marginTop="@dimen/loginViewsMargin"/>
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="Time to Vote" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
@@ -43,26 +40,24 @@
                     <EditText
                         android:id="@+id/editTextNameCaption"
                         style="@style/userDetailsEditTextCaption"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="1"
-                        android:layout_alignParentStart="true"
                         android:layout_width="95dp"
+                        android:layout_alignParentStart="true"
+                        android:editable="false"
+                        android:inputType="none"
+                        android:maxLines="1"
                         android:text="Name          :" />
 
                     <EditText
                         android:id="@+id/editTextName"
                         style="@style/userDetailsEditText"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="1"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@+id/editTextNameCaption"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:hint="Name"/>
-
-
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextNameCaption"
+                        android:editable="false"
+                        android:hint="Name"
+                        android:inputType="none"
+                        android:maxLines="1" />
 
 
                 </RelativeLayout>
@@ -82,25 +77,25 @@
                     <EditText
                         android:id="@+id/editTextAadharCaption"
                         style="@style/userDetailsEditTextCaption"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="1"
-                        android:layout_alignParentStart="true"
                         android:layout_width="95dp"
-                        android:text="Aadhar No :"
+                        android:layout_alignParentStart="true"
+                        android:editable="false"
+                        android:hint="@string/login_email_hint"
+                        android:inputType="none"
+                        android:maxLines="1"
 
-                        android:hint="@string/login_email_hint"/>
+                        android:text="Aadhar No :" />
 
                     <EditText
                         android:id="@+id/editTextAadhar"
                         style="@style/userDetailsEditText"
-                        android:inputType="phone"
-                        android:maxLines="1"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@+id/editTextAadharCaption"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:hint="Aadhar Number"/>
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextAadharCaption"
+                        android:hint="Aadhar Number"
+                        android:inputType="phone"
+                        android:maxLines="1" />
 
                 </RelativeLayout>
 
@@ -119,26 +114,26 @@
                     <EditText
                         android:id="@+id/editTextAddressCaption"
                         style="@style/userDetailsEditTextCaption"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="1"
-                        android:layout_alignParentStart="true"
                         android:layout_width="95dp"
-                        android:text="Address     :"
+                        android:layout_alignParentStart="true"
+                        android:editable="false"
+                        android:hint="@string/login_email_hint"
+                        android:inputType="none"
+                        android:maxLines="1"
 
-                        android:hint="@string/login_email_hint"/>
+                        android:text="Address     :" />
 
                     <EditText
                         android:id="@+id/editTextAddress"
                         style="@style/userDetailsEditText"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="3"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@+id/editTextAddressCaption"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:hint="Address"/>
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextAddressCaption"
+                        android:editable="false"
+                        android:hint="Address"
+                        android:inputType="none"
+                        android:maxLines="3" />
 
                 </RelativeLayout>
 
@@ -157,25 +152,25 @@
                     <EditText
                         android:id="@+id/editTextVoteStatusCaption"
                         style="@style/userDetailsEditTextCaption"
-                        android:inputType="none"
-                        android:editable="false"
-                        android:maxLines="2"
-                        android:layout_alignParentStart="true"
                         android:layout_width="95dp"
-                        android:text="Party Name         :"
+                        android:layout_alignParentStart="true"
+                        android:editable="false"
+                        android:hint="@string/login_email_hint"
+                        android:inputType="none"
+                        android:maxLines="2"
 
-                        android:hint="@string/login_email_hint"/>
+                        android:text="Party Name         :" />
 
                     <Spinner
                         android:id="@+id/spinnerParty"
-                        android:theme="@style/userDetailsEditText"
-                        android:inputType="none"
-                        android:maxLines="4"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@+id/editTextVoteStatusCaption"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"/>
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/editTextVoteStatusCaption"
+                        android:inputType="none"
+                        android:maxLines="4"
+                        android:theme="@style/userDetailsEditText" />
 
                 </RelativeLayout>
 
@@ -184,9 +179,9 @@
             <Button
                 android:id="@+id/buttonVote"
                 style="@style/loginButton"
-                android:text="Vote"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/loginViewsMargin"/>
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="Vote" />
 
             <TextView
                 android:id="@+id/fingerprintHeadingLabel"
@@ -210,8 +205,8 @@
                 android:id="@+id/fingerprintScanStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
                 android:layout_gravity="center"
+                android:padding="20dp"
                 android:text=""
                 android:textAlignment="center" />
 

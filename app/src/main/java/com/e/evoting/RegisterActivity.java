@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    TextView userName, userPhone, userPassword, userPasswordConfirmation, userEmail,userAadhar, userAddress;
+    TextView userName, userPhone, userPassword, userPasswordConfirmation, userEmail, userAadhar, userAddress;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
@@ -47,15 +47,14 @@ public class RegisterActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
 
-       // myRef.setValue("Hello, World!");
+        // myRef.setValue("Hello, World!");
 
     }
 
     public void existingUser(View view) {
         finish();
-        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
-
 
 
     private void registerNewUser() {
@@ -69,27 +68,27 @@ public class RegisterActivity extends AppCompatActivity {
         final String address = userAddress.getText().toString().trim();
 
 
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             warn("name");
-        }else if(phone.isEmpty()) {
+        } else if (phone.isEmpty()) {
             warn("phone");
-        }else if(email.isEmpty()) {
+        } else if (email.isEmpty()) {
             warn("email");
-        }else if(password.isEmpty()) {
+        } else if (password.isEmpty()) {
             warn("password");
-        }else if(passwordConfirm.isEmpty()) {
+        } else if (passwordConfirm.isEmpty()) {
             warn("passwordConfirm");
-        }else if(aadharNo.isEmpty()) {
+        } else if (aadharNo.isEmpty()) {
             warn("Aadhar Number");
-        }else if(address.isEmpty()) {
+        } else if (address.isEmpty()) {
             warn("Address");
-        }else if(!(password.equals(passwordConfirm))){
+        } else if (!(password.equals(passwordConfirm))) {
             userPassword.setText("");
             userPasswordConfirmation.setText("");
 
-            Toast.makeText(getApplicationContext(), R.string.password_not_matched,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.password_not_matched, Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,13 +102,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
 
 
-
-                                setUserDetails(user,name,phone,email,aadharNo,address);
+                                setUserDetails(user, name, phone, email, aadharNo, address);
 
 
                                 //updateUI(user);
                                 finish();
-                                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -124,19 +122,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                     })
-            .addOnFailureListener(this, new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RegisterActivity.this, "Authentication failed."+e.getLocalizedMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
+                    .addOnFailureListener(this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "Authentication failed." + e.getLocalizedMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
         }
-
-
-
-
 
 
     }
@@ -144,18 +138,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void setUserDetails(FirebaseUser user, String name, String phone, String email, String aadharNo, String address) {
 
-        Person person = new Person( name,  phone,  email,  aadharNo,  address,false);
+        Person person = new Person(name, phone, email, aadharNo, address, false);
         myRef.child(user.getUid()).setValue(person).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
-                Toast.makeText(getApplicationContext(),"Data Uploaded Successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Data Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -164,18 +158,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
     private void warn(String value) {
 
-        Toast.makeText(getApplicationContext(),value + " cannot be empty",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), value + " cannot be empty", Toast.LENGTH_SHORT).show();
 
 
     }
 
     private void updateUI(FirebaseUser currentUser) {
 
-        Toast.makeText(this,"Welcome "+currentUser,Toast.LENGTH_LONG).show();
-
+        Toast.makeText(this, "Welcome " + currentUser, Toast.LENGTH_LONG).show();
 
 
     }

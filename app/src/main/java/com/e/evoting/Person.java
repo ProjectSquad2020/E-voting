@@ -80,11 +80,9 @@ public class Person {
         this.address = address;
     }
 
-    Person(){
+    Person() {
 
     }
-
-
 
 
 }

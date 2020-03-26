@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,9 +9,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTop"
-        android:background="@color/cardview_shadow_start_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/cardview_shadow_start_color"
         android:padding="16dp"
         app:cardCornerRadius="16dp">
 
@@ -27,19 +26,17 @@
             <Button
                 android:id="@+id/buttonShowVotesFrag"
                 style="@style/CardView.Light"
-                android:background="@color/cardview_shadow_end_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@color/cardview_shadow_end_color"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:text="Count the votes" />
+                android:text="Count the votes"
+                android:textColor="@color/colorPrimary" />
 
             <EditText
                 android:id="@+id/editTextTotalVotesFrag"
                 android:layout_width="wrap_content"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:hint="@string/login_email_hint"
@@ -48,7 +45,9 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Total no. Votes :000"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -57,11 +56,11 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
-        android:background="#8F8F86"
-        android:layout_below="@id/cardViewTop"
         android:id="@+id/relativeLayoutFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/cardViewTop"
+        android:background="#8F8F86"
         android:orientation="horizontal">
 
         <View
@@ -104,23 +103,23 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/relativeLayoutFrag"
-        android:layout_above="@+id/cardViewBottom"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:id="@+id/recyclerViewFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/recyclerViewFrag">
+        android:layout_above="@+id/cardViewBottom"
+        android:layout_below="@+id/relativeLayoutFrag"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.cardview.widget.CardView
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:id="@+id/cardViewBottom"
-        android:background="@color/cardview_shadow_start_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:background="@color/cardview_shadow_start_color"
         android:padding="16dp"
         app:cardCornerRadius="16dp">
 
@@ -135,8 +134,6 @@
             <EditText
                 android:id="@+id/editTextWinnerFrag"
                 android:layout_width="wrap_content"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:hint="@string/login_email_hint"
@@ -145,7 +142,9 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Total no. Votes :000"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
 
         </LinearLayout>

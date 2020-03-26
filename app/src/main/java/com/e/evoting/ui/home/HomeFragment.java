@@ -60,14 +60,6 @@ public class HomeFragment extends Fragment {
         final Button buttonVoted = root.findViewById(R.id.editTextVoteStatus);
 
 
-
-
-
-
-
-
-
-
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users").child(MainActivity.user.getUid());
 
@@ -77,16 +69,16 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Person p  = (Person)dataSnapshot.getValue(Person.class);
+                Person p = (Person) dataSnapshot.getValue(Person.class);
 
                 editTextName.setText(p.getName());
                 editTextPhone.setText(p.getPhone());
                 editTextAddress.setText(p.getAddress());
 
-                if(p.getVoted()){
+                if (p.getVoted()) {
                     buttonVoted.setText("Voted");
                     buttonVoted.setBackgroundResource(R.drawable.vote_status_yes);
-                }else{
+                } else {
                     buttonVoted.setText("Not Voted");
                     buttonVoted.setBackgroundResource(R.drawable.vote_status_no);
 
@@ -99,15 +91,9 @@ public class HomeFragment extends Fragment {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 //Log.w(TAG, "Failed to read value.", error.toException());
-                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
-
 
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

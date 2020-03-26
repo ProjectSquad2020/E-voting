@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/loginCard"
-    app:cardCornerRadius="@dimen/loginCardRadius"
-    android:elevation="5dp"
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/loginViewsMargin"
     android:layout_marginBottom="@dimen/loginViewsMargin"
     android:background="@color/whiteCardColor"
+    android:elevation="5dp"
+    app:cardCornerRadius="@dimen/loginCardRadius"
     tools:context=".RegisterActivity">
 
     <LinearLayout
@@ -18,101 +18,108 @@
 
         <TextView
             style="@style/headerTextPrimary"
-            android:text="@string/register"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/register" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userName"
                 style="@style/modifiedEditText"
+                android:hint="Name"
                 android:inputType="text"
-                android:maxLines="1"
-                android:hint="Name"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userPhoneNo"
                 style="@style/modifiedEditText"
+                android:hint="Mobile Number"
                 android:inputType="phone"
-                android:maxLines="1"
-                android:hint="Mobile Number"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userAadharNo"
                 style="@style/modifiedEditText"
+                android:hint="Aadhar Number"
                 android:inputType="phone"
-                android:maxLines="1"
-                android:hint="Aadhar Number"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userAddress"
                 style="@style/modifiedEditText"
+                android:hint="Address"
                 android:inputType="textPostalAddress"
-                android:maxLines="3"
-                android:hint="Address"/>
+                android:maxLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userEmail"
                 style="@style/modifiedEditText"
+                android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:hint="@string/login_email_hint"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userPassword"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
-                android:maxLines="1"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
+
             <EditText
                 android:id="@+id/userPasswordConfirmation"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_confirmation_hint"
-                android:maxLines="1"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             style="@style/loginButton"
             android:layout_gravity="center"
-            android:text="Register"
-            android:onClick="registerNewUser"/>
+            android:onClick="registerNewUser"
+            android:text="Register" />
 
         <TextView
             style="@style/parent"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="@color/primaryTextColor"
-            android:text="@string/signup_login_hint"
+            android:layout_marginTop="@dimen/loginViewsMargin"
             android:onClick="existingUser"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:text="@string/signup_login_hint"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -39,7 +39,7 @@ public class SlideshowFragment extends Fragment {
     private SlideshowViewModel slideshowViewModel;
 
     private Button buttonCountVotes;
-    private EditText editTextTotalVotes, editTextWinner,editTextPartyNameFrag,editTextCountFrag;
+    private EditText editTextTotalVotes, editTextWinner, editTextPartyNameFrag, editTextCountFrag;
     private ArrayList<Result> countedResults;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReferenceCounted;
@@ -62,8 +62,7 @@ public class SlideshowFragment extends Fragment {
 
         buttonCountVotes = (Button) root.findViewById(R.id.buttonShowVotesFrag);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewFrag);
-        relativeLayout = (RelativeLayout)root.findViewById(R.id.relativeLayoutFrag);
-
+        relativeLayout = (RelativeLayout) root.findViewById(R.id.relativeLayoutFrag);
 
 
         buttonCountVotes.setEnabled(false);
@@ -104,7 +103,6 @@ public class SlideshowFragment extends Fragment {
 
                     editTextPartyNameFrag.setText("Count");
                     relativeLayout.setBackgroundColor(Color.parseColor("#8F8F86"));
-
 
 
                     //Toast.makeText(getContext(), "Votes already counted!!", Toast.LENGTH_LONG).show();
@@ -173,29 +171,27 @@ public class SlideshowFragment extends Fragment {
 
         ArrayList<Result> results;
 
-            int total=0;
-            for(Result rr : countedResults){
-                total+=rr.getNumberOfVotes();
-            }
-            editTextTotalVotes.setText("Total no. of Votes :"+total);
-            results = countedResults;
+        int total = 0;
+        for (Result rr : countedResults) {
+            total += rr.getNumberOfVotes();
+        }
+        editTextTotalVotes.setText("Total no. of Votes :" + total);
+        results = countedResults;
 
 
         String winner = "";
 
         int maxVotes = results.get(0).getNumberOfVotes();
-        for(Result r: results){
+        for (Result r : results) {
 
-            if(r.getNumberOfVotes() == maxVotes){
-                winner+=r.getPartyName()+'\n';
+            if (r.getNumberOfVotes() == maxVotes) {
+                winner += r.getPartyName() + '\n';
 
             }
 
 
         }
-        editTextWinner.setText("Winner :"+winner);
-
-
+        editTextWinner.setText("Winner :" + winner);
 
 
         adapter = new ResultViewAdapter(results);

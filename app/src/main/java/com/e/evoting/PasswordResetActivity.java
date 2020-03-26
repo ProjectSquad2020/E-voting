@@ -26,9 +26,9 @@ public class PasswordResetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        editTextEmail = (EditText)findViewById(R.id.editTextEmailReset);
-        editTextEmailConfirm = (EditText)findViewById(R.id.editTextEmailConfirmReset);
-        textViewErrorMessage = (TextView)findViewById(R.id.textViewError);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmailReset);
+        editTextEmailConfirm = (EditText) findViewById(R.id.editTextEmailConfirmReset);
+        textViewErrorMessage = (TextView) findViewById(R.id.textViewError);
         textViewErrorMessage.setText("");
 
 
@@ -41,28 +41,28 @@ public class PasswordResetActivity extends AppCompatActivity {
         String email = editTextEmail.getText().toString().trim();
         String emailConfirm = editTextEmailConfirm.getText().toString().trim();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             textViewErrorMessage.setText("Email cannot be empty!");
 
-        }else if(emailConfirm.isEmpty()){
+        } else if (emailConfirm.isEmpty()) {
             textViewErrorMessage.setText("Confirm Email cannot be empty!");
 
-        }else if(!(email.equals(emailConfirm))){
+        } else if (!(email.equals(emailConfirm))) {
             textViewErrorMessage.setText("Both the emails must be same!");
 
-        }else{
+        } else {
 
             firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(getApplicationContext(),"Password reset link sent successfully!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Password reset link sent successfully!", Toast.LENGTH_SHORT).show();
                     finish();
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
 
                 }

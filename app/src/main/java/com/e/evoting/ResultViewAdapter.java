@@ -12,17 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.ViewHolder>{
+public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.ViewHolder> {
     private ArrayList<Result> results;
 
     // RecyclerView recyclerView;
     public ResultViewAdapter(ArrayList<Result> results) {
         this.results = results;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.list_item, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -35,7 +36,7 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+resultData.getPartyName(),Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "click on item: " + resultData.getPartyName(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -51,11 +52,12 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         public EditText editTextPartyName;
         public EditText editTextCount;
         public RelativeLayout relativeLayout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.editTextPartyName = (EditText) itemView.findViewById(R.id.editTextPartyName);
             this.editTextCount = (EditText) itemView.findViewById(R.id.editTextCount);
-            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         }
     }
 }

@@ -33,7 +33,7 @@ import java.util.Map;
 public class AdminActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReferenceBlocks,databaseReferenceCounted;
+    DatabaseReference databaseReferenceBlocks, databaseReferenceCounted;
     private FirebaseAuth mAuth;
     ArrayList<Block> blocks;
     ArrayList<Vote> votes;
@@ -41,7 +41,7 @@ public class AdminActivity extends AppCompatActivity {
 
     ArrayList<String> partyNames;
 
-    EditText editTextTotalVotes,editTextWinner;
+    EditText editTextTotalVotes, editTextWinner;
 
     ArrayList<Result> countedResults;
     Boolean counted;
@@ -53,9 +53,9 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        editTextTotalVotes = (EditText)findViewById(R.id.editTextTotalVotes);
-        editTextWinner = (EditText)findViewById(R.id.editTextWinner);
-        buttonCountVotes = (Button)findViewById(R.id.buttonCountVotes);
+        editTextTotalVotes = (EditText) findViewById(R.id.editTextTotalVotes);
+        editTextWinner = (EditText) findViewById(R.id.editTextWinner);
+        buttonCountVotes = (Button) findViewById(R.id.buttonCountVotes);
 
         buttonCountVotes.setEnabled(false);
         buttonCountVotes.setText("Loading the data....");
@@ -84,10 +84,10 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                counted = (Boolean)dataSnapshot.getValue(Boolean.class);
-               // Toast.makeText(getApplicationContext(),"Counted value "+counted,Toast.LENGTH_LONG).show();
+                counted = (Boolean) dataSnapshot.getValue(Boolean.class);
+                // Toast.makeText(getApplicationContext(),"Counted value "+counted,Toast.LENGTH_LONG).show();
 
-               if(!counted) {
+                if (!counted) {
 
                     databaseReferenceBlocks.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -126,47 +126,46 @@ public class AdminActivity extends AppCompatActivity {
                         }
                     });
 
-               }else {
-                   //results already counted
-                   upload = false;
-                   Toast.makeText(getApplicationContext(),"Votes already counted!!",Toast.LENGTH_LONG).show();
+                } else {
+                    //results already counted
+                    upload = false;
+                    Toast.makeText(getApplicationContext(), "Votes already counted!!", Toast.LENGTH_LONG).show();
 
-                   DatabaseReference countedReference = firebaseDatabase.getReference("results");
+                    DatabaseReference countedReference = firebaseDatabase.getReference("results");
 
-                   countedReference.addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    countedReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                               Result r = (Result)dataSnapshot.getValue(Result.class);
+                                Result r = (Result) dataSnapshot.getValue(Result.class);
 
-                               countedResults.add(r);
+                                countedResults.add(r);
 
-                               buttonCountVotes.setEnabled(true);
-                               buttonCountVotes.setText("See the results");
-
-
-                           }
-
-                       }
-
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                       }
-                   });
+                                buttonCountVotes.setEnabled(true);
+                                buttonCountVotes.setText("See the results");
 
 
-               }
+                            }
 
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                }
 
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -178,38 +177,35 @@ public class AdminActivity extends AppCompatActivity {
 
         ArrayList<Result> results;
 
-        if(!counted){
-            editTextTotalVotes.setText("Total no. of Votes :"+partyNames.size());
+        if (!counted) {
+            editTextTotalVotes.setText("Total no. of Votes :" + partyNames.size());
             results = countFreq(getStringArray(partyNames));
 
 
-        }else{
-            int total=0;
-            for(Result rr : countedResults){
-                total+=rr.numberOfVotes;
+        } else {
+            int total = 0;
+            for (Result rr : countedResults) {
+                total += rr.numberOfVotes;
             }
-            editTextTotalVotes.setText("Total no. of Votes :"+total);
+            editTextTotalVotes.setText("Total no. of Votes :" + total);
             results = countedResults;
 
         }
 
 
-
         String winner = "";
 
         int maxVotes = results.get(0).getNumberOfVotes();
-        for(Result r: results){
+        for (Result r : results) {
 
-            if(r.getNumberOfVotes() == maxVotes){
-                winner+=r.getPartyName()+'\n';
+            if (r.getNumberOfVotes() == maxVotes) {
+                winner += r.getPartyName() + '\n';
 
             }
 
 
         }
-        editTextWinner.setText("Winner :"+winner);
-
-
+        editTextWinner.setText("Winner :" + winner);
 
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -219,15 +215,13 @@ public class AdminActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        if(!counted && upload) {
-            Toast.makeText(getApplicationContext(),"Counted value : "+counted+"\nUpload value : "+upload,Toast.LENGTH_LONG).show();
+        if (!counted && upload) {
+            Toast.makeText(getApplicationContext(), "Counted value : " + counted + "\nUpload value : " + upload, Toast.LENGTH_LONG).show();
             savedata(results);
         }
 
         buttonCountVotes.setEnabled(false);
         buttonCountVotes.setText("Results declared");
-
-
 
 
     }
@@ -236,18 +230,18 @@ public class AdminActivity extends AppCompatActivity {
 
         DatabaseReference resultsReference = firebaseDatabase.getReference("results");
 
-        for(Result r : results){
+        for (Result r : results) {
 
             resultsReference.push().setValue(r).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Log.w("Results",r.partyName+"uploaded");
+                    Log.w("Results", r.partyName + "uploaded");
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.w("Results",r.partyName+"upload failed");
+                    Log.w("Results", r.partyName + "upload failed");
 
                 }
             });
@@ -259,18 +253,16 @@ public class AdminActivity extends AppCompatActivity {
         countedReference.setValue(Boolean.TRUE).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.w("Results counted","set to true");
+                Log.w("Results counted", "set to true");
 
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w("Results counted","upload failed");
+                Log.w("Results counted", "upload failed");
             }
         });
-
-
 
 
     }
@@ -284,11 +276,11 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void welcome(FirebaseUser currentUser) {
-        if(currentUser!=null){
-            Toast.makeText(getApplicationContext(),"welcome : "+currentUser.getEmail(),Toast.LENGTH_LONG).show();
+        if (currentUser != null) {
+            Toast.makeText(getApplicationContext(), "welcome : " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
             //getData();
-        }else{
-            Toast.makeText(getApplicationContext(),"User not logged in",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "User not logged in", Toast.LENGTH_LONG).show();
 
 
         }
@@ -297,32 +289,26 @@ public class AdminActivity extends AppCompatActivity {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private static ArrayList<Result> countFreq(String[] arr)
-    {
+    private static ArrayList<Result> countFreq(String[] arr) {
         Map<String, Integer> mp = new HashMap<>();
 
         // Traverse through array elements and
         // count frequencies
-        for (int i = 0; i < arr.length; i++)
-        {
-            if (mp.containsKey(arr[i]))
-            {
+        for (int i = 0; i < arr.length; i++) {
+            if (mp.containsKey(arr[i])) {
                 mp.put(arr[i], mp.get(arr[i]) + 1);
-            }
-            else
-            {
+            } else {
                 mp.put(arr[i], 1);
             }
         }
 
-        return  sortByValueJava8Stream(mp);
+        return sortByValueJava8Stream(mp);
 
 
     }
 
     // Function to convert ArrayList<String> to String[]
-    public static String[] getStringArray(ArrayList<String> arr)
-    {
+    public static String[] getStringArray(ArrayList<String> arr) {
 
         // declaration and initialise String Array
         String str[] = new String[arr.size()];
@@ -338,8 +324,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private static ArrayList<Result> sortByValueJava8Stream(Map<String, Integer> unSortedMap)
-    {
+    private static ArrayList<Result> sortByValueJava8Stream(Map<String, Integer> unSortedMap) {
 
         System.out.println("Unsorted Map : " + unSortedMap);
 
@@ -358,11 +343,10 @@ public class AdminActivity extends AppCompatActivity {
         ArrayList<Result> results = new ArrayList<>();
 
         // Traverse through map and print frequencies
-        for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet())
-        {
+        for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
 
-            results.add(new Result(entry.getKey(),entry.getValue()));
+            results.add(new Result(entry.getKey(), entry.getValue()));
 
         }
 
