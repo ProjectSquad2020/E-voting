@@ -312,44 +312,70 @@ public class GalleryFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users").child(MainActivity.user.getUid());
 
+        DatabaseReference countedReference = database.getReference("counted");
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        countedReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Person p = (Person) dataSnapshot.getValue(Person.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             Boolean counted = (Boolean) dataSnapshot.getValue(Boolean.class);
 
-                editTextName.setText(p.getName());
+             if(counted){
 
-                aadharNo = p.getAadhar();
-                voted = p.getVoted();
-                //Toast.makeText(getActivity(),"voted="+voted,Toast.LENGTH_LONG).show();
-                if (voted) {
-                    //Toast.makeText(getActivity(),"You have already voted!!",Toast.LENGTH_SHORT).show();
-                    Log.w(TAG, "Voted in if: " + voted);
-                    editTextAadharNo.setText(aadharNo);
-                    editTextAadharNo.setEnabled(false);
-                    buttonVote.setEnabled(false);
-                    buttonVote.setText("Already Voted!!!");
-                    dynamicSpinner.setEnabled(false);
-                }
+                 buttonVote.setEnabled(false);
+                 buttonVote.setText("Voting Timed out!!");
+                 dynamicSpinner.setEnabled(false);
+
+             }else{
+                 // Read from the database
+                 myRef.addValueEventListener(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         // This method is called once with the initial value and again
+                         // whenever data at this location is updated.
+                         Person p = (Person) dataSnapshot.getValue(Person.class);
+
+                         editTextName.setText(p.getName());
+
+                         aadharNo = p.getAadhar();
+                         voted = p.getVoted();
+                         //Toast.makeText(getActivity(),"voted="+voted,Toast.LENGTH_LONG).show();
+                         if (voted) {
+                             //Toast.makeText(getActivity(),"You have already voted!!",Toast.LENGTH_SHORT).show();
+                             Log.w(TAG, "Voted in if: " + voted);
+                             editTextAadharNo.setText(aadharNo);
+                             editTextAadharNo.setEnabled(false);
+                             buttonVote.setEnabled(false);
+                             buttonVote.setText("Already Voted!!!");
+                             dynamicSpinner.setEnabled(false);
+                         }
 
 
-                editTextAddress.setText(p.getAddress());
+                         editTextAddress.setText(p.getAddress());
 
 
-                Log.w(TAG, "Voted: " + voted);
+                         Log.w(TAG, "Voted: " + voted);
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError error) {
+                         // Failed to read value
+                         //Log.w(TAG, "Failed to read value.", error.toException());
+                         Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                     }
+                 });
+
+             }
+
+
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
+
 
 
     }

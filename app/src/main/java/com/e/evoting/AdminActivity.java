@@ -79,7 +79,8 @@ public class AdminActivity extends AppCompatActivity {
 
     private void getData() {
 
-        databaseReferenceCounted.addValueEventListener(new ValueEventListener() {
+
+        databaseReferenceCounted.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -219,6 +220,7 @@ public class AdminActivity extends AppCompatActivity {
 
 
         if(!counted && upload) {
+            Toast.makeText(getApplicationContext(),"Counted value : "+counted+"\nUpload value : "+upload,Toast.LENGTH_LONG).show();
             savedata(results);
         }
 
